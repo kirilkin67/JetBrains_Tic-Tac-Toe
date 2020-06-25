@@ -43,18 +43,18 @@ def check_winner(field):
 	line_wins = ((0, 1, 2), (3, 4, 5), (6, 7, 8),
 				(0, 3, 6), (1, 4, 7), (2, 5, 8),
 				(0, 4, 8), (2, 4, 6))
-	winner = ''
+	wins = ''
 	for line in line_wins:
 		if field[line[0]] == field[line[1]] == field[line[2]] != SPACE:
-			winner = field[line[0]]
-			return winner
+			wins = field[line[0]]
+			return wins
 	if SPACE not in field:
 		return DRAW
 	return None
 
 
-def next_step(step):
-	if step == PLAYER_X:
+def next_step(player):
+	if player == PLAYER_X:
 		return PLAYER_O
 	else:
 		return PLAYER_X
