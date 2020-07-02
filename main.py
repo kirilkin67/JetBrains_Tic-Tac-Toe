@@ -58,4 +58,4 @@ print(f'The tax for {income} is {percent}%. That is {calculated_tax} dollars!')'
 tic_tac_toe.main()'''
 
 import bank
-bank.menu_account()
+bank.main()

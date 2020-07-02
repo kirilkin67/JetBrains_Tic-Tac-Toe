@@ -135,3 +135,26 @@ s.pop()
 s.peek()
 s.pop()
 print(s.is_empty())
+
+
+from random import randrange
+
+def create_cart_number():
+    card_number = [4, 0, 0, 0, 0, 0]
+    for _ in range(9):
+        card_number.append(randrange(10))
+    print(card_number)
+    number = [n for n in card_number]
+    for n in range(0, 15, 2):
+        number[n] *= 2
+    print(number)
+    for n in range(15):
+        if number[n] > 9:
+            number[n] -= 9
+    print(number)
+    print(sum(number))
+    print(10 - sum(number) % 10)
+    card_number.append(0 if sum(number) % 10 == 0 else 10 - sum(number) % 10)
+    print(card_number)
+    # card_number = [str(n) for n in card_number]
+    print("".join([str(n) for n in card_number]))

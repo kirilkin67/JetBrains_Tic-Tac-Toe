@@ -1,5 +1,22 @@
 import random
 
+
+def create_cart_number():
+    """Luhn algorithm"""
+
+    card_number = [4, 0, 0, 0, 0, 0]
+    for _ in range(9):
+        card_number.append(random.randrange(10))
+    number = [n for n in card_number]
+    for n in range(0, 15, 2):
+        number[n] *= 2
+    for n in range(15):
+        if number[n] > 9:
+            number[n] -= 9
+    card_number.append(0 if sum(number) % 10 == 0 else 10 - sum(number) % 10)
+    return "".join([str(n) for n in card_number])
+
+
 class Account:
     bank_cards = {}  # dictionary, key = card_number:list[pin, balans]
 
@@ -9,9 +26,7 @@ class Account:
         self.balance = 0
 
     def generation_card(self):
-        self.card_number = "400000"
-        for _ in range(10):
-            self.card_number += str(random.randrange(10))
+        self.card_number = create_cart_number()
         self.card_pin = ""
         for _ in range(4):
             self.card_pin += str(random.randrange(10))
@@ -62,6 +77,7 @@ def log_into_account():
         print("\nWrong card number or PIN!")
         menu_account()
 
+
 def menu_account():
     print(MENU_PROGRAM)
     choice = input('Your choice: > ')
@@ -74,6 +90,9 @@ def menu_account():
     if choice == "2":
         log_into_account()
     
+
+def main():
+    menu_account()
 
 # def menu():
 #     start = input('\n1. Create an account\n2. Log into account\n0. Exit')
