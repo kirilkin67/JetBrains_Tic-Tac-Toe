@@ -24,19 +24,20 @@ print(f'The tax for {income} is {percent}%. That is {calculated_tax} dollars!')'
 # print(f'http://example.com/{nickname}/desirable/{profession}/profile')
 # print('http://example.com/{}/desirable/{}/profile'.format(nickname, profession))
 
-# number = float(input())
-# count = int(input())
-# print('{:.{precision}f}'.format(number, precision=count))
-# print('{:.{}f}'.format(number, count))
-# print(f'{number:.{count}f}')
+'''number = float(input())
+count = int(input())
+print('{:.{precision}f}'.format(number, precision=count))
+print('{:.{}f}'.format(number, count))
+print(f'{number:.{count}f}')
 
-# movie, director, year = input(), input(), input()
-# print(f'{movie} (dir. {director}) came out in {year}')
-# print(f'{input()} (dir. {input()}) came out in {input()}')
-# print('{0} (dir. {1}) came out in {2}'.format(input(), input(), input()))
+movie, director, year = input(), input(), input()
+print(f'{movie} (dir. {director}) came out in {year}')
+print(f'{input()} (dir. {input()}) came out in {input()}')
+print('{0} (dir. {1}) came out in {2}'.format(input(), input(), input()))'''
 
 # from random import choice
 # from math import copysign
+
 # import random
 # import string
 
@@ -57,5 +58,6 @@ print(f'The tax for {income} is {percent}%. That is {calculated_tax} dollars!')'
 '''import tic_tac_toe
 tic_tac_toe.main()'''
 
-import bank
-bank.main()
+import bank_new
+
+bank_new.main()

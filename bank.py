@@ -1,7 +1,8 @@
 import random
+import sqlite3
 
 
-def create_cart_number():
+def create_card_number():
     """Luhn algorithm"""
 
     card_number = [4, 0, 0, 0, 0, 0]
@@ -17,8 +18,15 @@ def create_cart_number():
     return "".join([str(n) for n in card_number])
 
 
+def create_pin_number():
+    card_pin = ""
+    for _ in range(4):
+        card_pin += str(random.randrange(10))
+    return card_pin
+
+
 class Account:
-    bank_cards = {}  # dictionary, key = card_number:list[pin, balans]
+    bank_card = []  # dictionary, key = card_number:list[pin, balans] or list(id, number, pin, balans)
 
     def __init__(self):
         self.card_number = None
@@ -26,10 +34,8 @@ class Account:
         self.balance = 0
 
     def generation_card(self):
-        self.card_number = create_cart_number()
-        self.card_pin = ""
-        for _ in range(4):
-            self.card_pin += str(random.randrange(10))
+        self.card_number = create_card_number()
+        self.card_pin = create_pin_number()
         print("\nYour card has been created\nYour card number:\n{}\nYour card PIN:\n{}".format(self.card_number, self.card_pin))
         Account.bank_cards[self.card_number] = [self.card_pin, self.balance]
 
@@ -91,8 +97,75 @@ def menu_account():
         log_into_account()
     
 
+def create_database(file_name):
+    conn = sqlite3.connect(file_name)
+    cur = conn.cursor()
+    cur.execute("""CREATE TABLE card (
+                id INTEGER,
+                number TEXT,
+                pin TEXT,
+                balance INTEGER DEFAULT 0)""")
+    conn.commit()
+    conn.close()
+
+
+def insert_database(file_name):
+    conn = sqlite3.connect(file_name)
+    cur = conn.cursor()
+    cur.execute("INSERT INTO card VALUES (2, '1234567584588', '1111', 0 )")
+    conn.commit()
+    conn.close()
+
+
+def select_database(file_name):
+    conn = sqlite3.connect(file_name)
+    cur = conn.cursor()
+    cur.execute('SELECT rowid, * FROM card')
+    result = cur.fetchall()
+    for res in result:
+        print(res)
+
+
+def drop_database(file_name):
+    conn = sqlite3.connect(file_name)
+    cur = conn.cursor()
+    cur.execute("DROP TABLE card")
+    conn.commit()
+
+
+def create_account(file_name):
+    conn = sqlite3.connect(file_name)
+    cur = conn.cursor()
+    id = random.randrange(0, 100)
+    card = create_card_number()
+    pin = create_pin_number()
+    account = [id, card, pin, 0]
+    cur.execute("INSERT INTO card VALUES (?, ?, ?, ?)", account)
+    conn.commit()
+    conn.close()
+
+
+def update_database(file_name):
+    conn = sqlite3.connect(file_name)
+    cur = conn.cursor()
+    cur.execute('UPDATE card SET id = 1')
+    conn.commit()
+    # cur.execute('UPDATE card SET id = id + 1')
+    result = cur.fetchall()
+    for res in result:
+        print(res)
+    conn.commit()
+    conn.close()
+
 def main():
-    menu_account()
+    database_card = 'card.s3db'
+    # drop_database(database_card)
+    # create_database(database_card)
+    # create_account(database_card)
+    # insert_database(db_card)
+    update_database(database_card)
+    select_database(database_card)
+    # menu_account()
 
 # def menu():
 #     start = input('\n1. Create an account\n2. Log into account\n0. Exit')
