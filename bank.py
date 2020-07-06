@@ -163,7 +163,7 @@ def main():
     # create_database(database_card)
     # create_account(database_card)
     # insert_database(db_card)
-    update_database(database_card)
+    # update_database(database_card)
     select_database(database_card)
     # menu_account()
 
