@@ -20,7 +20,7 @@ def is_coordinate(data):
         if not num.isdigit():
             print("You should enter numbers!")
             return False
-        elif 1 < int(num) > 3:
+        elif int(num) < 1 or 3 < int(num):
             print("Coordinates should be from 1 to 3!")
             return False
     return True
